@@ -197,4 +197,4 @@ if selected_section == "Results":
 
 # Footer
 st.markdown("---")
-st.write("Built with ❤️ by Grok 3 (xAI) | Current Date: April 15, 2025")
+st.write("Built by Burst Software Development | Current Date: April 15, 2025")
