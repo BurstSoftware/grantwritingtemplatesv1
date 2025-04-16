@@ -74,12 +74,14 @@ if selected_section == "Business Size":
 # Section 4: Time in Operation
 if selected_section == "Time in Operation":
     st.header("4. Time in Operation")
-    start_date = st.date_input("Business start date:", value=datetime(2025, 4, 15), 
-                               min_value=datetime(1900, 1, 1), max_value=datetime(2025, 4, 15), key="start_date")
+    start_date = st.date_input("Business start date:", value=datetime(2025, 4, 15).date(), 
+                               min_value=datetime(1900, 1, 1).date(), max_value=datetime(2025, 4, 15).date(), key="start_date")
     
     # Calculate years operational only if start_date is valid
     if start_date:
-        years_operational = (datetime(2025, 4, 15) - start_date).days / 365.25
+        # Convert start_date (datetime.date) to datetime.datetime
+        start_datetime = datetime.combine(start_date, datetime.min.time())
+        years_operational = (datetime(2025, 4, 15) - start_datetime).days / 365.25
         save_response("years_operational", years_operational)
         st.write(f"Years operational: {years_operational:.1f}")
     else:
@@ -223,7 +225,7 @@ if selected_section == "Results":
         # Use of Funds Check
         uses = responses.get("use_of_funds", [])
         if uses:
-            feedback.append(f"✅ Planned eigenlijk uses ({', '.join(uses)}) align with common allowable expenses.")
+            feedback.append(f"✅ Planned uses ({', '.join(uses)}) align with common allowable expenses.")
 
         # Matching Funds Check
         if responses.get("match_available") in ["Yes", "Partial"]:
@@ -240,4 +242,4 @@ if selected_section == "Results":
 
 # Footer
 st.markdown("---")
-st.write("Built By Burst Software Development | Current Date: April 15, 2025")
+st.write("Built with ❤️ by Grok 3 (xAI) | Current Date: April 15, 2025")
